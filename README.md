@@ -1,3 +1,7 @@
+THIS IS JENNA LUC'S RCLASS PROJECT 1 REPOSITORY!!!!!!!
+The initial exploratory code is within the processing code.
+
+
 # Overview
 
 A template file and folder structure for a data analysis project/paper done with R/Quarto/Github. The structure promotes a data science pipeline for reproducibility in research. 
