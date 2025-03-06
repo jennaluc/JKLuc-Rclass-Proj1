@@ -19,12 +19,13 @@ require(skimr)
 # Data loading 
 
 ```{r}
+setwd("../../Project-template/Data/Raw_data")
+
 data_location <- "../../Data/Raw_data/penguins_raw_dirty.csv"
 data_path <- "../../Data/Raw_data"
 ```
 
 ```{r}
-setwd("../../Project-template/Data/Raw_data")
 rawdata <- read.csv(data_location, check.names=FALSE)
 ```
 
