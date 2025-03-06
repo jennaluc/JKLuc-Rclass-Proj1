@@ -33,7 +33,8 @@ rawdata <- read.csv(data_location, check.names=FALSE)
 # Check data
 
 ```{r}
-dictionary <- read.csv(paste(data_path, "datadictionary.csv", sep=""))
+file_path <- file.path(data_path, "datadictionary.csv", sep="")
+dictionary <- read.csv(file_path)
 print(dictionary)
 ```
 
@@ -44,10 +45,8 @@ summary(rawdata)
 head(rawdata)
 skimr::skim(rawdata)
 ```
-# Histograms of raw data
+# Histogram of raw data
 ```{r}
-hist(rawdata$"Culmen Length (mm)", main="Histogram of Culmen Length (mm)", xlab="Culmen Length (mm)", col="lightblue", breaks=30)
-
 hist(rawdata$"Body Mass (g)", main="Histogram of Body Mass (g)", xlab="Body Mass (g)", col="orange", breaks=30)
 ```
 
@@ -136,13 +135,13 @@ cl[ cl > 300 ]
 ```
 
 # Excluding NA's 
+
 ```{r}
 cl[ !is.na(cl) & cl>300 ]
 ```
 
 ```{r}
 cl[ !is.na(cl) & cl>300 ] <- cl[ !is.na(cl) & cl>300 ]/10  
-
 d2$"Culmen Length (mm)" <- cl
 ```
 
@@ -161,11 +160,9 @@ hist(d2$"Body Mass (g)")
 ```{r}
 d3 <- d2
 mm <- d3$"Body Mass (g)"
-
-mm[ mm < 100 ] <- NA       # replace tiny masses with NA
-nas <- which( is.na(mm) )  # find which rows have NA for mass
-
-d3 <- d3[ -nas, ]   # drop the penguins (rows) with missing masses
+mm[ mm < 100 ] <- NA
+nas <- which( is.na(mm) ) 
+d3 <- d3[ -nas, ]
 
 skimr::skim(d3)
 hist(d3$"Body Mass (g)")
@@ -174,13 +171,15 @@ plot(d3$"Body Mass (g)", d3$"Culmen Length (mm)")
 ```
 
 # After cleaning, check the data again
+
 ```{r}
 hist(d2$"Culmen Length (mm)", main="Histogram of Cleaned Culmen Length (mm)", xlab="Culmen Length (mm)", col="lightblue", breaks=30)
 
-hist(d2$"Body Mass (g)", main="Histogram of Cleaned Body Mass (g)", xlab="Body Mass (g)", col="lightgreen", breaks=30)
+hist(d3$"Body Mass (g)", main="Histogram of Cleaned Body Mass (g)", xlab="Body Mass (g)", col="lightgreen", breaks=30)
 ```
 
 # Summary of cleaned data
+
 ```{r}
 summary(d2$"Culmen Length (mm)")
 summary(d2$"Body Mass (g)")
